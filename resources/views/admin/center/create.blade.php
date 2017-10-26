@@ -1,4 +1,6 @@
-@extends('layouts.sidebar')
+@extends('admin.main')
+
+@section('title', 'Create Center')
 
 @section('content')
     <div class="container-fluid">
@@ -10,7 +12,8 @@
                         <p class="category">Create new Center</p>
                     </div>
                     <div class="card-content">
-                        <form>
+                        <form method="POST" action="{{ route('center.store') }}">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
@@ -27,12 +30,12 @@
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Detail address</label>
-                                        <input type="email" class="form-control" name="address">
+                                        <input type="text" class="form-control" name="address">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Office Manaer</label>
+                                        <label class="control-label">Office Manager</label>
                                         <input type="text" class="form-control" name="manager">
                                     </div>
                                 </div>
@@ -45,7 +48,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Office Email</label>
-                                        <input type="text" class="form-control" name="contact">
+                                        <input type="email" class="form-control" name="email">
                                     </div>
                                 </div>
                             </div>
@@ -57,5 +60,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

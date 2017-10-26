@@ -1,4 +1,6 @@
-@extends('layouts.sidebar')
+@extends('admin.main')
+
+@section('title', 'Dashboard')
 
 @section('content')
                 <div class="container-fluid">

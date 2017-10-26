@@ -11,22 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
 
-Route::get('/center', function(){
-	return view('admin.center.index');
-});
+Auth::routes();
 
-Route::get('/center/create', function(){
-	return view('admin.center.create');
-});
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+  Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
 
-Route::get('/center/edit', function(){
-	return view('admin.center.edit');
-});
+  Route::resource('/center', 'Admin\CenterController', ['except' => 'show']);
 
-Route::get('/center/delete', function(){
-	return view('admin.center.delete');
 });
