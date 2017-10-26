@@ -12,5 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard');
+});
+
+Route::get('/center', function(){
+	return view('admin.center.index');
+});
+
+Route::get('/center/create', function(){
+	return view('admin.center.create');
+});
+
+Route::get('/center/edit', function(){
+	return view('admin.center.edit');
+});
+
+Route::get('/center/delete', function(){
+	return view('admin.center.delete');
 });
