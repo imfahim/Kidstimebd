@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title', 'Center')
+@section('title', 'Course')
 
 @section('content')
 <div class="container-fluid">
@@ -16,7 +16,7 @@
 
 					<table class="table">
 						<thead class="text-primary">
-							<th>Curse Code</th>
+							<th>Course Code</th>
 							<th>Title</th>
 							<th>Details</th>
 							<th>Fee</th>
