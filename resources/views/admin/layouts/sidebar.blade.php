@@ -17,6 +17,18 @@
                 <p>Center</p>
             </a>
         </li>
+        <li class="">
+            <a href="/admin/course">
+                <i class="material-icons">list</i>
+                <p>Course</p>
+            </a>
+        </li>
+        <li class="">
+            <a href="/admin/enrollment">
+                <i class="material-icons"></i>
+                <p>Enrollment</p>
+            </a>
+        </li>
         <li class="active-pro">
             <a href="http://kidstimebd.com" target="_blank">
                 <i class="material-icons">near_me</i>
