@@ -14,8 +14,10 @@
 /*
 * For homepage - Login Page
 */
-Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
-
+//Route::get('/', 'Auth\LoginController@showLoginForm')->name('welcome');
+Route::get('/', function () {
+    return view('welcome');
+});
 /*
 * For login
 */
