@@ -45,10 +45,42 @@
                                         <input type="text" class="form-control" name="mother_name">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Date Of Birth</label>
-                                        <input type="text" class="form-control" name="Dob">
+                                        <div class="col-md-4">
+                                          <div class="col-md-8">
+                                        <select class="form-control" name="dob_day">
+                                          @for ($i = 1; $i < 32; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                        <h4>/</h4>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="dob_month">
+                                          @for ($i = 1; $i < 13; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                        <h4>/</h4>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="dob_year">
+                                          @for ($i = 2018; $i > 2010; $i--)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -63,7 +95,7 @@
                                         <input type="text" class="form-control" name="email">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-12">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Transaction No</label>
                                         <input type="text" class="form-control" name="transaction_no">

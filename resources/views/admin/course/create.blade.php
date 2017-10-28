@@ -42,31 +42,134 @@
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Time</label>
-                                        <input type="text" class="form-control" name="time">
+                                        <div class="col-md-4">
+                                          <div class="col-md-8">
+                                        <select class="form-control" name="time_hour">
+                                          @for ($i = 12; $i > 0; $i--)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+
+                                        </select>
+                                      </div>
+                                      <div class="col-md-2">
+                                        <h4>:</h4>
+                                      </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="time_min">
+                                          @for ($i = 0; $i < 61; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                      </div>
+                                      <div class="col-md-2">
+                                        <h4>:</h4>
+                                      </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="time_pm">
+                                              <option value="0">AM</option>
+                                              <option value="1">PM</option>
+                                        </select>
+                                      </div>
+                                      </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Total Seats</label>
-                                        <input type="text" class="form-control" name="total_seats">
+                                        <select class="form-control" name="total_seats">
+                                          @for ($i = 0; $i < 51; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Remaining Seats</label>
-                                        <input type="text" class="form-control" name="remaining_seats">
-                                    </div>
+                                        <select class="form-control" name="remaining_seats">
+                                          @for ($i = 0; $i < 51; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Registration Deadline</label>
-                                        <input type="text" class="form-control" name="deadline">
-                                    </div>
+                                        <div class="col-md-4">
+                                          <div class="col-md-8">
+                                        <select class="form-control" name="reg_dead_day">
+                                          @for ($i = 1; $i < 32; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                        <h4>/</h4>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="reg_dead_month">
+                                          @for ($i = 1; $i < 13; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                        <h4>/</h4>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="reg_dead_year">
+                                          @for ($i = 2018; $i > 2010; $i--)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        </div>
+                                      </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Starting Date</label>
-                                        <input type="text" class="form-control" name="starting_date">
+                                        <div class="col-md-4">
+                                          <div class="col-md-8">
+                                        <select class="form-control" name="start_day">
+                                          @for ($i = 1; $i < 32; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                        <h4>/</h4>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="start_month">
+                                          @for ($i = 1; $i < 13; $i++)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                        <h4>/</h4>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="col-md-8">
+                                        <select class="form-control" name="start_year">
+                                          @for ($i = 2018; $i > 2010; $i--)
+                                              <option value="{{$i}}">{{$i}}</option>
+                                          @endfor
+                                        </select>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
