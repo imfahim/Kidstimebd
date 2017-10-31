@@ -61,3 +61,11 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('centers', 'Api\PostController@centers')->name('centers.post');
 
 });
+
+
+Route::get('/test', function(){
+  return view('test');
+});
+Route::get('/test/show', 'Admin\CourseController@index');
+Route::get('/test/show/{id}', 'Admin\CourseController@show');
+Route::get('/test/edit/{id}', 'Admin\CourseController@edit');
