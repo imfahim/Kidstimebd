@@ -18,7 +18,7 @@
             </a>
         </li>
         <li class="">
-            <a href="/admin/course">
+            <a href="{{route('course.index')}}">
                 <i class="material-icons">list</i>
                 <p>Course</p>
             </a>

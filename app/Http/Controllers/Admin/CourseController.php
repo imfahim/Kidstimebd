@@ -30,7 +30,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('admin.course.create');
+      $centers = Center::all();
+        return view('admin.course.create')->with('centers',$centers);
     }
 
     /**
@@ -144,7 +145,7 @@ class CourseController extends Controller
         $centers_array = collect($centers)->pluck("name")->all();
 
         //return view('admin.course.edit')->with('course', $course)->with('centers_array', $centers_array);
-        return view('test')->with('course', $course)->with('centers_array', $centers_array);
+        return view('admin.course.edit')->with('course', $course)->with('centers_array', $centers_array);
     }
 
     /**
@@ -193,6 +194,6 @@ class CourseController extends Controller
         $course = Course::destroy($request->id);
 
         Session::flash('success', 'The courses  are successfully deleted !');
-        return view('admin.course.index');
+        return redirect()->route('course.index');
     }
 }

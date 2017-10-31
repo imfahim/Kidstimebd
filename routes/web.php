@@ -59,6 +59,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 Route::group(['prefix' => 'api'], function(){
   Route::get('centers', 'Api\GetController@centers')->name('centers.get');
   Route::post('centers', 'Api\PostController@centers')->name('centers.post');
+  Route::get('courses', 'Api\GetController@courses')->name('courses.get');
+  Route::post('courses', 'Api\PostController@courses')->name('courses.post');
 
 });
 
@@ -67,5 +69,5 @@ Route::get('/test', function(){
   return view('test');
 });
 Route::get('/test/show', 'Admin\CourseController@index');
-Route::get('/test/show/{id}', 'Admin\CourseController@show');
-Route::get('/test/edit/{id}', 'Admin\CourseController@edit');
+//Route::get('/test/show/{id}', 'Admin\CourseController@show');
+//Route::get('/test/edit/{id}', 'Admin\CourseController@edit');

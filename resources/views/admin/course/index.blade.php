@@ -6,14 +6,14 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<a href="/admin/course/create" type="button" class="btn btn-default">Create New Course</a>
+			<a href="{{route('course.create')}}" type="button" class="btn btn-default">Create New Course</a>
 			<div class="card">
 				<div class="card-header" data-background-color="orange">
 					<h4 class="title">Courses</h4>
 					<p class="category">All course List</p>
 				</div>
 				<div class="card-content table-responsive">
-
+					@if ($courses)
 					<table class="table">
 						<thead class="text-primary">
 							<th>Course Code</th>
@@ -30,22 +30,34 @@
 							<th></th>
 						</thead>
 						<tbody>
-
-							<td>Curse Code</td>
-							<td>Title</td>
-							<td>Details</td>
-							<td>Fee</td>
-							<td>Time</td>
-							<td>Total Seats</td>
-							<td>Remaining Seats</td>
-							<td>Registration Deadline</td>
-							<td>Starting Date</td>
-							<td>Status</td>
-							<td><a href="/admin/course/edit" class="btn btn-info btn-sm">Edit</a></td>
-							<td><a href="" class="btn btn-danger btn-xs">Delete</a></td>
+							@foreach ($courses as $course)
+							<tr>
+								<td>{{ $course->course_id }}</td>
+								<td>{{ $course->title}}</td>
+								<td>{{ $course->details}}</td>
+								<td>{{ $course->fee}}</td>
+								<td>{{ $course->time}}</td>
+								<td>{{ $course->total_seats}}</td>
+								<td>{{ $course->remaining_seats}}</td>
+								<td>{{ $course->registration_deadline}}</td>
+								<td>{{ $course->starting_date}}</td>
+								<td>{{ ($course->status) ? 'Enabled' : 'Disabled' }}</td>
+								<td><a href="{{ route('course.edit', [$course->id]) }}" class="btn btn-info btn-sm">Edit</a></td>
+								<td>
+									<form method="POST" action="{{ route('course.destroy', [$course->id]) }}">
+										{{ csrf_field() }}
+										<input type="hidden" name="_method" value="delete" />
+										<input type="hidden" name="id" value="{{ $course->id }}" />
+										<input type="submit" class="btn btn-danger btn-xs" value="Delete"/>
+									</form>
+								</td>
+							</tr>
+							@endforeach
 						</tbody>
 					</table>
-
+					@else
+						<h5>No Item's yet, Please add a Course.</h5>
+					@endif
 				</div>
 			</div>
 		</div>
