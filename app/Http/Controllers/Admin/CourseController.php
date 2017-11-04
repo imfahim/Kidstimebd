@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Course;
 use App\Center;
 use Session;
+use Carbon\Carbon;
 
 class CourseController extends Controller
 {
@@ -30,7 +31,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-      $centers = Center::all();
+        $centers = Center::all(['name', 'id']);
         return view('admin.course.create')->with('centers',$centers);
     }
 
@@ -42,33 +43,32 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $courses = Course::all();
 
         if($courses->isEmpty()){
           $last_course_code = 2001;
+
           $time_data = [
-            'start_time' => '9:30',
-            'end_time' => '2:00',
-            'day' => [
-              'Saturday',
-              'Monday',
-              'Wednesday'
-            ],
+            'start_time' => $request->start_time_hour.':'.$request->start_time_min.' '.$request->start_time_pm,
+            'end_time' => $request->end_time_hour.':'.$request->end_time_min.' '.$request->end_time_pm,
+            'days' => $request->days,
           ];
+
+          $reg_dead_date = Carbon::createFromDate($request->reg_dead_year, $request->reg_dead_month, $request->reg_dead_day, 'Asia/Dhaka');
+          $starting_date = Carbon::createFromDate($request->start_year, $request->start_month, $request->start_day, 'Asia/Dhaka');
 
           $course = new Course;
 
           $course->course_id = $last_course_code;
-          $course->center_id = 3;
-          $course->title = 'Crafting';
-          $course->details = 'Crafting is a innovative way to improve childs thinkings.';
-          $course->fee = 2500;
+          $course->center_id = $request->center_id;
+          $course->title = $request->title;
+          $course->details = $request->details;
+          $course->fee = $request->fee;
           $course->time = json_encode($time_data, true);
-          $course->total_seats = 10;
-          $course->remaining_seats = 10;
-          $course->registration_deadline = date('Y-m-d H:i:s');
-          $course->starting_date = date('Y-m-d H:i:s');
+          $course->total_seats = $request->total_seats;
+          $course->remaining_seats = $request->total_seats;
+          $course->registration_deadline = $reg_dead_date;
+          $course->starting_date = $starting_date;
           $course->status = 1;
 
           $course->save();
@@ -79,53 +79,36 @@ class CourseController extends Controller
 
         $courses = null;
 
-        $last_entry = Center::orderBy('center_id', 'desc')->first();
-        $last_course_code = $last_entry->center_id + 1;
+        $last_entry = Course::orderBy('course_id', 'desc')->first();
+        $last_course_code = $last_entry->course_id + 1;
 
         $time_data = [
-          'start_time' => '9:30',
-          'end_time' => '2:00',
-          'day' => [
-            'Saturday',
-            'Monday',
-            'Wednesday'
-          ],
+          'start_time' => $request->start_time_hour.':'.$request->start_time_min.' '.$request->start_time_pm,
+          'end_time' => $request->end_time_hour.':'.$request->end_time_min.' '.$request->end_time_pm,
+          'days' => $request->days,
         ];
+
+        $reg_dead_date = Carbon::createFromDate($request->reg_dead_year, $request->reg_dead_month, $request->reg_dead_day, 'Asia/Dhaka');
+        $starting_date = Carbon::createFromDate($request->start_year, $request->start_month, $request->start_day, 'Asia/Dhaka');
 
         $course = new Course;
 
         $course->course_id = $last_course_code;
-        $course->center_id = 3;
-        $course->title = 'Crafting';
-        $course->details = 'Crafting is a innovative way to improve childs thinkings.';
-        $course->fee = 2500;
+        $course->center_id = $request->center_id;
+        $course->title = $request->title;
+        $course->details = $request->details;
+        $course->fee = $request->fee;
         $course->time = json_encode($time_data, true);
-        $course->total_seats = 10;
-        $course->remaining_seats = 10;
-        $course->registration_deadline = date('Y-m-d H:i:s');
-        $course->starting_date = date('Y-m-d H:i:s');
+        $course->total_seats = $request->total_seats;
+        $course->remaining_seats = $request->total_seats;
+        $course->registration_deadline = $reg_dead_date;
+        $course->starting_date = $starting_date;
         $course->status = 1;
 
         $course->save();
 
         Session::flash('success', 'Course has been added successfully !');
         return redirect()->route('course.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $course = Course::with('center')->find($id);
-        $time = json_decode($course->time);
-
-        //dd($course);
-        //return view('admin.course.show')->with('course', $course)->with('time', $time);
-        return view('test')->with('course', $course)->with('time', $time);
     }
 
     /**
@@ -136,16 +119,46 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
         $course = Course::with('center')->find($id);
+        $centers = Center::all(['name', 'id']);
+
+        // Times
+        $decoded_time = json_decode($course->time);
+
+        $start_time = explode(':', $decoded_time->start_time);
+        $start_time_sec = explode(' ', $start_time[1]);
+        $end_time = explode(':', $decoded_time->end_time);
+        $end_time_sec = explode(' ', $end_time[1]);
+
+        $time = [
+          'start_time_hour' => $start_time[0],
+          'start_time_min' => $start_time_sec[0],
+          'start_time_pm' => $start_time_sec[1],
+          'end_time_hour' => $end_time[0],
+          'end_time_min' => $end_time_sec[0],
+          'end_time_pm' => $end_time_sec[1],
+        ];
+
+        // Dates
+        $reg_date = explode('-', $course->registration_deadline);
+        $start_date = explode('-', $course->starting_date);
+
+        $dates = [
+          'reg_dead_year' => $reg_date[0],
+          'reg_dead_month' => $reg_date[1],
+          'reg_dead_day' => $reg_date[2],
+          'start_date_year' => $start_date[0],
+          'start_date_month' => $start_date[1],
+          'start_date_day' => $start_date[2]
+        ];
 
 
-        // For filling up the select box with centers names
-        $centers = Center::all();
-        $centers_array = collect($centers)->pluck("name")->all();
-
-        //return view('admin.course.edit')->with('course', $course)->with('centers_array', $centers_array);
-        return view('admin.course.edit')->with('course', $course)->with('centers_array', $centers_array);
+        return view('admin.course.edit')
+        ->with('course', $course)
+        ->with('centers', $centers)
+        ->with('time', $time)
+        ->with('days', $decoded_time->days)
+        ->with('dates', $dates);
     }
 
     /**
@@ -155,17 +168,18 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-      $course = Course::find($id);
+      $course = Course::find($request->id);
 
       $time_data = [
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
-        'day' => [
-          $request->days
-        ],
+        'start_time' => $request->start_time_hour.':'.$request->start_time_min.' '.$request->start_time_pm,
+        'end_time' => $request->end_time_hour.':'.$request->end_time_min.' '.$request->end_time_pm,
+        'days' => $request->days,
       ];
+
+      $reg_dead_date = Carbon::createFromDate($request->reg_dead_year, $request->reg_dead_month, $request->reg_dead_day, 'Asia/Dhaka');
+      $starting_date = Carbon::createFromDate($request->start_year, $request->start_month, $request->start_day, 'Asia/Dhaka');
 
       $course->center_id = $request->center_id;
       $course->title = $request->title;
@@ -173,13 +187,14 @@ class CourseController extends Controller
       $course->fee = $request->fee;
       $course->time = json_encode($time_data, true);
       $course->total_seats = $request->total_seats;
-      $course->registration_deadline = $request->deadline;
-      $course->starting_date = $request->starting_date;
+      $course->registration_deadline = $reg_dead_date;
+      $course->starting_date = $starting_date;
       $course->status = $request->status;
 
       $course->save();
 
-      return "Done";
+      Session::flash('success', 'Course has been updated successfully !');
+      return redirect()->route('course.index');
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title', 'Create Center')
+@section('title', 'Create Course')
 
 @section('content')
     <div class="container-fluid">
@@ -15,40 +15,32 @@
                         <form method="POST" action="{{ route('course.store') }}">
                             {{ csrf_field() }}
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Course Code</label>
-                                        <input type="text" class="form-control" name="code">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Title</label>
+                                        <label class="control-label">Course Title</label>
                                         <input type="text" class="form-control" name="title">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Center</label>
-                                        <select class="form-control" name="center_code">
+                                        <select class="form-control" name="center_id">
                                           @foreach($centers as $center)
-                                              <option value="{{$center->center_id}}">{{$center->name}}</option>
+                                              <option value="{{$center->id}}">{{$center->name}}</option>
                                           @endforeach
-
                                         </select>
-
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Details</label>
-                                        <input type="text" class="form-control" name="details">
+                                        <label class="control-label">Fee</label>
+                                        <input type="text" class="form-control" name="fee">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Fee</label>
-                                        <input type="text" class="form-control" name="fee">
+                                        <label class="control-label">Details</label>
+                                        <input type="textarea" class="form-control" name="details">
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -56,7 +48,7 @@
                                         <label class="control-label">Start Time</label>
                                         <div class="col-md-4">
                                           <div class="col-md-8">
-                                        <select class="form-control" name="time_hour">
+                                        <select class="form-control" name="start_time_hour">
                                           @for ($i = 12; $i > 0; $i--)
                                               <option value="{{$i}}">{{$i}}</option>
                                           @endfor
@@ -69,7 +61,7 @@
                                       </div>
                                       <div class="col-md-4">
                                         <div class="col-md-8">
-                                        <select class="form-control" name="time_min">
+                                        <select class="form-control" name="start_time_min">
                                           @for ($i = 0; $i < 61; $i++)
                                               <option value="{{$i}}">{{$i}}</option>
                                           @endfor
@@ -81,9 +73,9 @@
                                       </div>
                                       <div class="col-md-4">
                                         <div class="col-md-8">
-                                        <select class="form-control" name="time_pm">
-                                              <option value="0">AM</option>
-                                              <option value="1">PM</option>
+                                        <select class="form-control" name="start_time_pm">
+                                              <option value="AM">AM</option>
+                                              <option value="PM">PM</option>
                                         </select>
                                       </div>
                                       </div>
@@ -94,7 +86,7 @@
                                         <label class="control-label">End Time</label>
                                         <div class="col-md-4">
                                           <div class="col-md-8">
-                                        <select class="form-control" name="time_hour">
+                                        <select class="form-control" name="end_time_hour">
                                           @for ($i = 12; $i > 0; $i--)
                                               <option value="{{$i}}">{{$i}}</option>
                                           @endfor
@@ -107,7 +99,7 @@
                                       </div>
                                       <div class="col-md-4">
                                         <div class="col-md-8">
-                                        <select class="form-control" name="time_min">
+                                        <select class="form-control" name="end_time_min">
                                           @for ($i = 0; $i < 61; $i++)
                                               <option value="{{$i}}">{{$i}}</option>
                                           @endfor
@@ -119,37 +111,37 @@
                                       </div>
                                       <div class="col-md-4">
                                         <div class="col-md-8">
-                                        <select class="form-control" name="time_pm">
-                                              <option value="0">AM</option>
-                                              <option value="1">PM</option>
+                                        <select class="form-control" name="end_time_pm">
+                                              <option value="AM">AM</option>
+                                              <option value="PM">PM</option>
                                         </select>
                                       </div>
                                       </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Day</label>
+                                        <label class="control-label">Days</label>
                                         <div class="checkbox-inline">
-                                         <label><input type="checkbox" value="1">Saturday</label>
+                                         <label><input type="checkbox" name="days[]" value="Saturday">Saturday</label>
                                         </div>
                                         <div class="checkbox-inline">
-                                         <label><input type="checkbox" value="2">Sunday</label>
+                                         <label><input type="checkbox" name="days[]" value="Sunday">Sunday</label>
                                         </div>
                                         <div class="checkbox-inline">
-                                         <label><input type="checkbox" value="3">Monday</label>
+                                         <label><input type="checkbox" name="days[]" value="Monday">Monday</label>
                                         </div>
                                         <div class="checkbox-inline">
-                                         <label><input type="checkbox" value="4">Tuesday</label>
+                                         <label><input type="checkbox" name="days[]" value="Tuesday">Tuesday</label>
                                         </div>
                                         <div class="checkbox-inline">
-                                         <label><input type="checkbox" value="5">Wednesday</label>
+                                         <label><input type="checkbox" name="days[]" value="Wednesday">Wednesday</label>
                                         </div>
                                         <div class="checkbox-inline">
-                                         <label><input type="checkbox" value="6">Thursday</label>
+                                         <label><input type="checkbox" name="days[]" value="Thursday">Thursday</label>
                                         </div>
                                         <div class="checkbox-inline">
-                                         <label><input type="checkbox" value="7">Friday</label>
+                                         <label><input type="checkbox" name="days[]" value="Friday">Friday</label>
                                         </div>
                                 </div>
                               </div>
@@ -162,15 +154,6 @@
                                           @endfor
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Remaining Seats</label>
-                                        <select class="form-control" name="remaining_seats">
-                                          @for ($i = 0; $i < 51; $i++)
-                                              <option value="{{$i}}">{{$i}}</option>
-                                          @endfor
-                                        </select>                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
@@ -208,7 +191,7 @@
                                         </select>
                                         </div>
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group label-floating">
@@ -250,7 +233,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary pull-right">Create</button>
-                            <a href="/admin/course" class="btn btn-primary pull-right">Back</a>
+                            <a href="{{ route('course.index') }}" class="btn btn-primary pull-right">Back</a>
                             <div class="clearfix"></div>
                         </form>
                     </div>

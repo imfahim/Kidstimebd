@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title', 'Course')
+@section('title', 'Courses')
 
 @section('content')
 <div class="container-fluid">
@@ -20,7 +20,7 @@
 							<th>Title</th>
 							<th>Details</th>
 							<th>Fee</th>
-							<th>Time</th>
+							<th>Period</th>
 							<th>Total Seats</th>
 							<th>Remaining Seats</th>
 							<th>Registration Deadline</th>
@@ -35,12 +35,20 @@
 								<td>{{ $course->course_id }}</td>
 								<td>{{ $course->title}}</td>
 								<td>{{ $course->details}}</td>
-								<td>{{ $course->fee}}</td>
-								<td>{{ $course->time}}</td>
+								<td>Tk. {{ $course->fee}}</td>
+								<td>
+									<small>Starting Time : {{ json_decode($course->time)->start_time }}</small><br />
+									<small>Ending Time : {{ json_decode($course->time)->end_time }}</small><br />
+									<small>Days :
+									@foreach (json_decode($course->time)->days as $day)
+										<li>{{ $day }}</li>
+									@endforeach
+									</small>
+								</td>
 								<td>{{ $course->total_seats}}</td>
 								<td>{{ $course->remaining_seats}}</td>
-								<td>{{ $course->registration_deadline}}</td>
-								<td>{{ $course->starting_date}}</td>
+								<td>{{ \Carbon\Carbon::parse($course->registration_deadline)->format('d/m/Y')}}</td>
+								<td>{{ \Carbon\Carbon::parse($course->starting_date)->format('d/m/Y')}}</td>
 								<td>{{ ($course->status) ? 'Enabled' : 'Disabled' }}</td>
 								<td><a href="{{ route('course.edit', [$course->id]) }}" class="btn btn-info btn-sm">Edit</a></td>
 								<td>
