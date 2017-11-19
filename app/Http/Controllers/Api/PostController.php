@@ -5,12 +5,21 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Enrollment;
+use App\Center;
 
 class PostController extends Controller
 {
     //
     public function centers(Request $request){
+      $center = new Center;
 
+      $center->center_id = $request->center_id;
+      $center->name = $request->name;
+      $center->location_heading = $request->location;
+      $center->address = $request->address;
+      $center->save();
+
+      return response()->json('Successfully Added', 201);
     }
 
     public function enrollments(Request $request){
