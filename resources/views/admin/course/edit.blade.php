@@ -120,7 +120,7 @@
                                         </div>
                                       </div>
                                   </div>
-                                  <div class="col-md-6">
+                                  <div class="col-md-12">
                                       <div class="form-group label-floating">
                                           <label class="control-label">Days</label>
                                           <div class="checkbox-inline">
@@ -155,7 +155,18 @@
                                             @endfor
                                           </select>
                                       </div>
-                                  </div>
+                                    </div>
+                                      <div class="col-md-6">
+                                      <div class="form-group label-floating">
+                                          <label class="control-label">Remaining Seats</label>
+                                          <select class="form-control" name="remaining_seats">
+                                            @for ($i = 0; $i < 51; $i++)
+                                            <option value="{{$i}}" {{ ($i == $course->remaining_seats) ? ' selected="selected"' : '' }}>{{$i}}</option>
+                                            @endfor
+                                          </select>
+                                      </div>
+                                    </div>
+
                                   <div class="col-md-6">
                                       <div class="form-group label-floating">
                                           <label class="control-label">Registration Deadline</label>

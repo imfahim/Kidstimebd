@@ -8,6 +8,8 @@ use App\Course;
 use App\Center;
 use Session;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CourseController extends Controller
 {
@@ -18,7 +20,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('center')->get();
+        $courses = Course::with('center')->paginate(5);
 
         return view('admin.course.index')->with('courses', $courses);
         //return view('test')->with('courses', $courses);
@@ -66,7 +68,7 @@ class CourseController extends Controller
           $course->fee = $request->fee;
           $course->time = json_encode($time_data, true);
           $course->total_seats = $request->total_seats;
-          $course->remaining_seats = $request->total_seats;
+          $course->remaining_seats = $request->remaining_seats;
           $course->registration_deadline = $reg_dead_date;
           $course->starting_date = $starting_date;
           $course->status = 1;
@@ -100,7 +102,7 @@ class CourseController extends Controller
         $course->fee = $request->fee;
         $course->time = json_encode($time_data, true);
         $course->total_seats = $request->total_seats;
-        $course->remaining_seats = $request->total_seats;
+        $course->remaining_seats = $request->remaining_seats;
         $course->registration_deadline = $reg_dead_date;
         $course->starting_date = $starting_date;
         $course->status = 1;
@@ -187,6 +189,7 @@ class CourseController extends Controller
       $course->fee = $request->fee;
       $course->time = json_encode($time_data, true);
       $course->total_seats = $request->total_seats;
+      $course->remaining_seats = $request->remaining_seats;
       $course->registration_deadline = $reg_dead_date;
       $course->starting_date = $starting_date;
       $course->status = $request->status;

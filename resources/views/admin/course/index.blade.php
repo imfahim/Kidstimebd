@@ -14,7 +14,7 @@
 				</div>
 				<div class="card-content table-responsive">
 					@if ($courses)
-					<table class="table">
+					<table class="table table-striped">
 						<thead class="text-primary">
 							<th>Course Code</th>
 							<th>Title</th>
@@ -63,6 +63,7 @@
 							@endforeach
 						</tbody>
 					</table>
+					{{ $courses->links() }}
 					@else
 						<h5>No Item's yet, Please add a Course.</h5>
 					@endif

@@ -14,7 +14,7 @@
 				</div>
 				<div class="card-content table-responsive">
 
-					<table class="table">
+					<table class="table table table-striped">
 						<thead class="text-primary">
 							<th>Enrollment Code</th>
 							<th>Course Code</th>

@@ -70,6 +70,9 @@ Route::group(['prefix' => 'api'], function(){
 Route::get('/test', function(){
   return view('test');
 });
+Route::get('/user', 'UserController@index')->name('user.index');
+
+Route::post('/user', 'UserController@getCourse')->name('user.courses');
 Route::get('/test/show', 'Admin\CourseController@index');
 //Route::get('/test/show/{id}', 'Admin\CourseController@show');
 //Route::get('/test/edit/{id}', 'Admin\CourseController@edit');

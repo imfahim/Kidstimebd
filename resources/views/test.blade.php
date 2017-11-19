@@ -6,4 +6,4 @@
 <br />
 <br />
 
-{{ $course->title }}
+{{ $id }}
