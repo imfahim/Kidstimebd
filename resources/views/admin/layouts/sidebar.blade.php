@@ -14,25 +14,25 @@
         <li class="{{ (Request::url() === route('center.index') || Request::url() === route('center.create')) ? 'active' : '' }}">
             <a href="{{ route('center.index') }}">
                 <i class="material-icons">place</i>
-                <p>Center</p>
+                <p>Centers</p>
             </a>
         </li>
-        <li class="">
+        <li class="{{ (Request::url() === route('course.index') || Request::url() === route('course.create')) ? 'active' : '' }}">
             <a href="{{route('course.index')}}">
                 <i class="material-icons">list</i>
-                <p>Course</p>
+                <p>Courses</p>
             </a>
         </li>
         <li class="">
             <a href="/admin/enrollment">
-                <i class="material-icons"></i>
-                <p>Enrollment</p>
+                <i class="material-icons">assignment</i>
+                <p>Enrollments</p>
             </a>
         </li>
         <li class="">
             <a href="/admin/user">
-                <i class="material-icons"></i>
-                <p>User</p>
+                <i class="material-icons">people</i>
+                <p>Users</p>
             </a>
         </li>
         <li class="active-pro">

@@ -61,6 +61,8 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('centers', 'Api\PostController@centers')->name('centers.post');
   Route::get('courses', 'Api\GetController@courses')->name('courses.get');
   Route::post('courses', 'Api\PostController@courses')->name('courses.post');
+  Route::get('enrollments', 'Api\GetController@enrollments')->name('enrollments.get');
+  Route::post('enrollments/create', 'Api\PostController@enrollments')->name('enrollments.post');
 
 });
 

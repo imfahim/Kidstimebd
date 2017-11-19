@@ -5,6 +5,8 @@
     @include('admin.layouts.head')
 
     @include('admin.layouts.styles')
+
+    @yield('page-styles')
 </head>
 
 <body>
@@ -33,5 +35,7 @@
 </body>
 
 @include('admin.layouts.scripts')
+
+@yield('page-scripts')
 
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Center;
+use App\Enrollment;
 
 class GetController extends Controller
 {
@@ -13,5 +14,11 @@ class GetController extends Controller
       $centers = Center::all();
 
       return response()->json($centers, 200);
+    }
+
+    public function enrollments(Request $request){
+      $enrollment = Enrollment::all();
+
+      return response()->json($enrollment, 200);
     }
 }

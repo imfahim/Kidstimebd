@@ -2,6 +2,11 @@
 
 @section('title', 'Center')
 
+@section('page-styles')
+	<!-- DataTables -->
+	<link href="{{ asset('css/datatable/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 <div class="container-fluid">
 	<div class="row">
@@ -14,7 +19,7 @@
 				</div>
 				<div class="card-content table-responsive">
 					@if ($centers)
-					<table class="table">
+					<table id="datatable-all" class="table" data-form="deleteForm">
 						<thead class="text-primary">
 							<th>Center Code</th>
 							<th>Name</th>
@@ -40,11 +45,11 @@
 									<td>{{ ($center->status) ? 'Enabled' : 'Disabled' }}</td>
 									<td><a href="{{ route('center.edit', [$center->id]) }}" class="btn btn-info btn-sm">Edit</a></td>
 									<td>
-										<form method="POST" action="{{ route('center.destroy', [$center->id]) }}">
+										<form class="form-delete" method="POST" action="{{ route('center.destroy', [$center->id]) }}">
 											{{ csrf_field() }}
 											<input type="hidden" name="_method" value="delete" />
 											<input type="hidden" name="id" value="{{ $center->id }}" />
-											<input type="submit" class="btn btn-danger btn-xs" value="Delete"/>
+											<input type="submit" class="btn btn-danger btn-xs" role="button" value="Delete"/>
 										</form>
 									</td>
 								</tr>
@@ -59,4 +64,33 @@
 		</div>
 	</div>
 </div>
+
+<!-- Confirmation Modal Box -->
+@include('admin.layouts.modal')
+
+@endsection
+
+@section('page-scripts')
+	<!-- DataTables -->
+	<script src="{{ asset('js/datatable/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/datatable/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
+
+	<!-- page script -->
+	<script>
+	  $(function () {
+	    $('#datatable-all').DataTable()
+	  })
+	</script>
+
+	<script>
+	// For Deletion Confirmation Modal
+	$('table[data-form="deleteForm"]').on('click', '.form-delete', function(e){
+	    e.preventDefault();
+	    var $form=$(this);
+	    $('#confirm').modal({ backdrop: 'static', keyboard: false })
+	        .on('click', '#delete-btn', function(){
+	            $form.submit();
+	        });
+	});
+	</script>
 @endsection
