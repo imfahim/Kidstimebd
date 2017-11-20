@@ -23,6 +23,9 @@
                         <p class="hidden-lg hidden-md">Profile</p>
                     </a>
                     <ul class="dropdown-menu">
+                      <li>
+                        <a href="{{route('profile.index')}}">Profile</a>
+                      </li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>&nbsp; Logout</a>

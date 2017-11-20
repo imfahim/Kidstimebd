@@ -30,9 +30,9 @@
             </a>
         </li>
         <li class="">
-            <a href="/admin/user">
+            <a href="{{route('admin.index')}}">
                 <i class="material-icons">people</i>
-                <p>Users</p>
+                <p>Admins</p>
             </a>
         </li>
         <li class="active-pro">

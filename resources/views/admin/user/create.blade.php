@@ -8,17 +8,17 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" data-background-color="orange">
-                        <h4 class="title">Create User</h4>
-                        <p class="category">Create new User</p>
+                        <h4 class="title">Create Admin</h4>
+                        <p class="category">Create new Admin</p>
                     </div>
                     <div class="card-content">
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route('admin.store') }}">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Username</label>
-                                        <input type="text" class="form-control" name="username">
+                                        <label class="control-label">Name</label>
+                                        <input type="text" class="form-control" name="name">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -36,7 +36,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Confirm Password</label>
-                                        <input type="text" class="form-control" name="confirm_password">
+                                        <input type="password" class="form-control" name="confirm_password">
                                     </div>
                                 </div>
                             </div>

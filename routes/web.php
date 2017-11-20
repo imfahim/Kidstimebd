@@ -42,13 +42,16 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 */
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
   Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
-
+  Route::post('/profile/changepass', 'Admin\ProfileController@edit')->name('profile.changepass');
   Route::resource('center', 'Admin\CenterController', ['except' => 'show']);
 
   Route::resource('course', 'Admin\CourseController', ['except' => 'show']);
 
+  Route::resource('admin', 'Admin\AdminController', ['except' => 'show']);
+
   Route::resource('enrollment', 'Admin\EnrollmentController', ['except' => 'show']);
 
+  Route::resource('profile', 'Admin\ProfileController', ['except' => 'show']);
   // Tor routes goes here
 
 });
@@ -61,10 +64,16 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('centers', 'Api\PostController@centers')->name('centers.post');
   Route::get('courses', 'Api\GetController@courses')->name('courses.get');
   Route::post('courses', 'Api\PostController@courses')->name('courses.post');
+  Route::get('admins', 'Api\GetController@admins')->name('admins.get');
+  Route::post('admins', 'Api\PostController@admins')->name('admins.post');
+  Route::get('profiles', 'Api\GetController@profiles')->name('profiles.get');
+  Route::post('profiles', 'Api\PostController@profiles')->name('profiles.post');
+
   Route::get('enrollments', 'Api\GetController@enrollments')->name('enrollments.get');
   Route::post('enrollments/create', 'Api\PostController@enrollments')->name('enrollments.post');
 
 });
+
 
 
 Route::get('/test', function(){
