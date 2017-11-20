@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Enrollment;
+use Session;
 
 class EnrollmentController extends Controller
 {
@@ -15,7 +17,8 @@ class EnrollmentController extends Controller
     public function index()
     {
         //
-        return view('admin.enrollment.index');
+        $enrolls = Enrollment::all();
+        return view('admin.enrollment.index')->with('enrolls', $enrolls);
     }
 
     /**

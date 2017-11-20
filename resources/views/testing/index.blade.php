@@ -7,7 +7,9 @@
   <body>
     <h1>Select box for showing center name</h1>
     <!-- Ei select box e ashe center name if you uncomment -->
-    <select id="select-center-name" name="center-name"></select>
+    <select id="select-center-name" onchange="getCourses();" name="center-name">
+      <option value='-1'>--Select--</option>
+    </select>
 
     <br />
     <br />

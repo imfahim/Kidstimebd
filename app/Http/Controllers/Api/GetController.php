@@ -24,8 +24,7 @@ class GetController extends Controller
     }
 
     public function course($id){
-      $course = Course::find($id);
-
-      return response()->json($course, 200);
+      $courses = Course::where('center_id', $id)->get();
+      return response()->json($courses, 200);
     }
 }

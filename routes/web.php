@@ -69,13 +69,13 @@ Route::group(['prefix' => 'api'], function(){
   Route::post('admins', 'Api\PostController@admins')->name('admins.post');
   Route::get('profiles', 'Api\GetController@profiles')->name('profiles.get');
   Route::post('profiles', 'Api\PostController@profiles')->name('profiles.post');
-
   Route::get('enrollments', 'Api\GetController@enrollments')->name('enrollments.get');
   Route::post('enrollments/create', 'Api\PostController@enrollments')->name('enrollments.post');
-
 });
 
-
+Route::get('/test/frontend', function(){
+  return view('testing.index');
+});
 
 Route::get('/test', function(){
   return view('test');

@@ -9,10 +9,7 @@ class UserController extends Controller
 {
     //
     public function index(){
-      $centers=DB::table('centers')
-                    ->get();
-
-      return view('user.index')->withCenters($centers);
+      return view('user.index');
     }
 
     public function getCourse(Request $request){
