@@ -63,6 +63,7 @@ Route::group(['prefix' => 'api'], function(){
   Route::get('centers', 'Api\GetController@centers')->name('centers.get');
   Route::post('centers', 'Api\PostController@centers')->name('centers.post');
   Route::get('courses', 'Api\GetController@courses')->name('courses.get');
+  Route::get('courses/{id}', 'Api\GetController@course');
   Route::post('courses', 'Api\PostController@courses')->name('courses.post');
   Route::get('admins', 'Api\GetController@admins')->name('admins.get');
   Route::post('admins', 'Api\PostController@admins')->name('admins.post');
