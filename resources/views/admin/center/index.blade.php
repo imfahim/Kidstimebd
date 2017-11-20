@@ -16,11 +16,31 @@
 				<div class="card-header" data-background-color="orange">
 					<h4 class="title">Centers</h4>
 					<p class="category">All center List</p>
+
 				</div>
+				<!--
+				<div class="col-md-12">
+					<div class="dropdown" style="padding: 20px;">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="material-icons">border_color</i>&nbsp; Actions
+						</a>
+						<ul class="dropdown-menu">
+								<li>
+										<a href="#" id="btnDeleteSelected"><i class="material-icons">close</i>&nbsp; Delete Selected</a>
+								</li>
+								<li>
+										<a href=""><i class="material-icons">close</i>&nbsp; Delete All</a>
+								</li>
+						</ul>
+					</div>
+				</div>
+				-->
 				<div class="card-content table-responsive">
 					@if ($centers)
+
 					<table id="datatable-all" class="table" data-form="deleteForm">
 						<thead class="text-primary">
+							<!--<th></th>-->
 							<th>Center Code</th>
 							<th>Name</th>
 							<th>Location</th>
@@ -35,6 +55,15 @@
 						<tbody>
 							@foreach ($centers as $center)
 								<tr>
+									<!--
+									<td>
+											<div class="checkbox">
+													<label>
+															<input type="checkbox" name="center_ids[]" value="{{ $center->id }}">
+													</label>
+											</div>
+									</td>
+									-->
 									<td>{{ $center->center_id }}</td>
 									<td>{{ $center->name }}</td>
 									<td>{{ $center->location_heading }}</td>

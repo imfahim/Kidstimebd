@@ -12,7 +12,7 @@
                                 </div>
                                 <div class="card-content">
                                     <p class="category">Total Centers</p>
-                                    <h3 class="title">23
+                                    <h3 class="title">{{ $centers_count }}
                                         <!--<small>CENTERS</small>-->
                                     </h3>
                                 </div>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="card-content">
                                     <p class="category">Total Courses</p>
-                                    <h3 class="title">23</h3>
+                                    <h3 class="title">{{ $courses_count }}</h3>
                                 </div>
                                 <div class="card-footer">
                                   <div class="stats">
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="card-content">
                                     <p class="category">Total Enrollments</p>
-                                    <h3 class="title">75</h3>
+                                    <h3 class="title">{{ $enrollments_count }}</h3>
                                 </div>
                                 <div class="card-footer">
                                   <div class="stats">
@@ -61,16 +61,16 @@
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card card-stats">
                                 <div class="card-header" data-background-color="blue">
-                                    <i class="fa fa-signal"></i>
+                                    <i class="fa fa-user"></i>
                                 </div>
                                 <div class="card-content">
-                                    <p class="category">Current Visitors</p>
-                                    <h3 class="title">+245</h3>
+                                    <p class="category">Total Admins</p>
+                                    <h3 class="title">{{ $admins_count }}</h3>
                                 </div>
                                 <div class="card-footer">
                                   <div class="stats">
                                       <i class="material-icons text-success">cloud_circle</i>
-                                      Tracking Now
+                                      Tracked from Database
                                   </div>
                                 </div>
                             </div>
@@ -83,13 +83,13 @@
                                     <div class="ct-chart" id="dailySalesChart"></div>
                                 </div>
                                 <div class="card-content">
-                                    <h4 class="title">Daily Sales</h4>
+                                    <h4 class="title">Daily Visitors</h4>
                                     <p class="category">
-                                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today visitors.</p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">access_time</i> updated 4 minutes ago
+                                        <i class="material-icons">access_time</i> Updates on every refresh
                                     </div>
                                 </div>
                             </div>
@@ -100,12 +100,12 @@
                                     <div class="ct-chart" id="emailsSubscriptionChart"></div>
                                 </div>
                                 <div class="card-content">
-                                    <h4 class="title">Email Subscriptions</h4>
-                                    <p class="category">Last Campaign Performance</p>
+                                    <h4 class="title">Enrollments Tracking</h4>
+                                    <p class="category">Last Month Performance</p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                        <i class="material-icons">access_time</i> Updates on every refresh
                                     </div>
                                 </div>
                             </div>
@@ -155,61 +155,6 @@
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                                        </td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes" checked>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -228,43 +173,6 @@
                                                         <td class="td-actions text-right">
                                                             <button type="button" rel="tooltip" title="For avoiding unstable losses" class="btn btn-primary btn-simple btn-xs">
                                                                 Backup Now !
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes" checked>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                                        </td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
                                                             </button>
                                                         </td>
                                                     </tr>
