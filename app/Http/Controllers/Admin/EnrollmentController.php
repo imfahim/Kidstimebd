@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Enrollment;
+use App\Course;
 use Session;
 
 class EnrollmentController extends Controller
@@ -16,8 +17,7 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        //
-        $enrolls = Enrollment::all();
+        $enrolls = Enrollment::with('course')->get(['id', 'enrollment_id', 'course_id', 'child_name', 'mother_name', 'father_name', 'contact_no', 'status']);
         return view('admin.enrollment.index')->with('enrolls', $enrolls);
     }
 
@@ -28,8 +28,9 @@ class EnrollmentController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.enrollment.create');
+      //  $courses = Course::with('center')->get(['title', 'id', 'center_id']);
+
+      //  return view('admin.enrollment.create')->with('courses', $courses);
     }
 
     /**
@@ -51,7 +52,8 @@ class EnrollmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $enrollment = Enrollment::with('course')->find($id);
+        return view('admin.enrollment.show')->with('enrollment', $enrollment);
     }
 
     /**
@@ -62,8 +64,10 @@ class EnrollmentController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('admin.enrollment.edit');
+        $enrollment = Enrollment::with('course')->find($id);
+        $courses = Course::all(['id', 'title']);
+
+        return view('admin.enrollment.edit')->with('enrollment', $enrollment)->with('courses', $courses);
     }
 
     /**
@@ -75,7 +79,23 @@ class EnrollmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $enrollment = Enrollment::find($request->id);
+
+        $enrollment->course_id = $request->course_id;
+        $enrollment->child_name = $request->child_name;
+        $enrollment->mother_name = $request->mother_name;
+        $enrollment->father_name = $request->father_name;
+        $enrollment->age = $request->age;
+        $enrollment->contact_no = $request->contact_no;
+        $enrollment->address = $request->address;
+        $enrollment->email = $request->email;
+        $enrollment->transaction_no = $request->transaction_no;
+        $enrollment->status = $request->status;
+
+        $enrollment->save();
+
+        Session::flash('success', 'The enrollment is successfully updated !');
+        return redirect()->route('enrollment.index');
     }
 
     /**
@@ -84,8 +104,12 @@ class EnrollmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+      // For deleting multiple rows pass the array of ids
+      $enrollment = Enrollment::destroy($request->id);
+
+      Session::flash('success', 'The enrollment is successfully deleted !');
+      return redirect()->route('enrollment.index');
     }
 }

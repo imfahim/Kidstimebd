@@ -1,11 +1,11 @@
 @extends('admin.main')
 
-@section('title', 'Admin')
+@section('title', 'Admins')
+
 @section('page-styles')
 	<!-- DataTables -->
 	<link href="{{ asset('css/datatable/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
 @endsection
-
 
 @section('content')
 <div class="container-fluid">
@@ -24,7 +24,6 @@
 							<th>Id</th>
 							<th>Name</th>
 							<th>Email</th>
-							<th>status</th>
 							<th></th>
 							<th></th>
 						</thead>
@@ -34,7 +33,6 @@
 									<td>{{ $admin->id }}</td>
 									<td>{{ $admin->name }}</td>
 									<td>{{ $admin->email}}</td>
-									<td>status column nai</td>
 									<td><a href="{{ route('admin.edit', [$admin->id]) }}" class="btn btn-info btn-sm">Set Password</a></td>
 									<td>
 										<form class="form-delete" method="POST" action="{{ route('admin.destroy', [$admin->id]) }}">

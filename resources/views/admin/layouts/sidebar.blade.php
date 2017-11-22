@@ -1,5 +1,5 @@
 <div class="logo">
-    <a href="http://www.kidstimebd.com" class="simple-text">
+    <a href="{{ url('/') }}" class="simple-text">
         Kids Time BD
     </a>
 </div>
@@ -23,13 +23,13 @@
                 <p>Courses</p>
             </a>
         </li>
-        <li class="">
-            <a href="/admin/enrollment">
+        <li class="{{ (Request::url() === route('enrollment.index')) ? 'active' : '' }}">
+            <a href="{{ route('enrollment.index') }}">
                 <i class="material-icons">assignment</i>
                 <p>Enrollments</p>
             </a>
         </li>
-        <li class="">
+        <li class="{{ (Request::url() === route('admin.index') || Request::url() === route('admin.create')) ? 'active' : '' }}">
             <a href="{{route('admin.index')}}">
                 <i class="material-icons">people</i>
                 <p>Admins</p>

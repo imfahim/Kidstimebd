@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title', 'Center')
+@section('title', 'Centers')
 
 @section('page-styles')
 	<!-- DataTables -->
@@ -38,7 +38,7 @@
 				<div class="card-content table-responsive">
 					@if ($centers)
 
-					<table id="datatable-all" class="table" data-form="deleteForm">
+					<table id="datatable-all" class="table table-striped" data-form="deleteForm">
 						<thead class="text-primary">
 							<!--<th></th>-->
 							<th>Center Code</th>

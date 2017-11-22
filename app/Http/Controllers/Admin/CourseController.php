@@ -20,10 +20,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('center')->paginate(5);
-
+        $courses = Course::with('center')->get();
         return view('admin.course.index')->with('courses', $courses);
-        //return view('test')->with('courses', $courses);
     }
 
     /**
@@ -34,7 +32,7 @@ class CourseController extends Controller
     public function create()
     {
         $centers = Center::all(['name', 'id']);
-        return view('admin.course.create')->with('centers',$centers);
+        return view('admin.course.create')->with('centers', $centers);
     }
 
     /**
@@ -56,8 +54,11 @@ class CourseController extends Controller
             'days' => $request->days,
           ];
 
-          $reg_dead_date = Carbon::createFromDate($request->reg_dead_year, $request->reg_dead_month, $request->reg_dead_day, 'Asia/Dhaka');
-          $starting_date = Carbon::createFromDate($request->start_year, $request->start_month, $request->start_day, 'Asia/Dhaka');
+          $new_start_date = str_replace('/', '-', $request->reg_date);
+          $reg_dead_date = Carbon::createFromFormat('d-m-Y', $new_start_date)->format('Y-m-d');
+
+          $new_end_date = str_replace('/', '-', $request->start_date);
+          $starting_date = Carbon::createFromFormat('d-m-Y', $new_end_date)->format('Y-m-d');
 
           $course = new Course;
 
@@ -90,8 +91,11 @@ class CourseController extends Controller
           'days' => $request->days,
         ];
 
-        $reg_dead_date = Carbon::createFromDate($request->reg_dead_year, $request->reg_dead_month, $request->reg_dead_day, 'Asia/Dhaka');
-        $starting_date = Carbon::createFromDate($request->start_year, $request->start_month, $request->start_day, 'Asia/Dhaka');
+        $new_start_date = str_replace('/', '-', $request->reg_date);
+        $reg_dead_date = Carbon::createFromFormat('d-m-Y', $new_start_date)->format('Y-m-d');
+
+        $new_end_date = str_replace('/', '-', $request->start_date);
+        $starting_date = Carbon::createFromFormat('d-m-Y', $new_end_date)->format('Y-m-d');
 
         $course = new Course;
 
@@ -142,25 +146,16 @@ class CourseController extends Controller
         ];
 
         // Dates
-        $reg_date = explode('-', $course->registration_deadline);
-        $start_date = explode('-', $course->starting_date);
-
-        $dates = [
-          'reg_dead_year' => $reg_date[0],
-          'reg_dead_month' => $reg_date[1],
-          'reg_dead_day' => $reg_date[2],
-          'start_date_year' => $start_date[0],
-          'start_date_month' => $start_date[1],
-          'start_date_day' => $start_date[2]
-        ];
-
+        $reg_dead_date = Carbon::createFromFormat('Y-m-d', $course->registration_deadline)->format('d-m-Y');
+        $starting_date = Carbon::createFromFormat('Y-m-d', $course->starting_date)->format('d-m-Y');
 
         return view('admin.course.edit')
         ->with('course', $course)
         ->with('centers', $centers)
         ->with('time', $time)
         ->with('days', $decoded_time->days)
-        ->with('dates', $dates);
+        ->with('reg_date', $reg_dead_date)
+        ->with('start_date', $starting_date);
     }
 
     /**
@@ -180,8 +175,11 @@ class CourseController extends Controller
         'days' => $request->days,
       ];
 
-      $reg_dead_date = Carbon::createFromDate($request->reg_dead_year, $request->reg_dead_month, $request->reg_dead_day, 'Asia/Dhaka');
-      $starting_date = Carbon::createFromDate($request->start_year, $request->start_month, $request->start_day, 'Asia/Dhaka');
+      $new_start_date = str_replace('/', '-', $request->reg_date);
+      $reg_dead_date = Carbon::createFromFormat('d-m-Y', $new_start_date)->format('Y-m-d');
+
+      $new_end_date = str_replace('/', '-', $request->start_date);
+      $starting_date = Carbon::createFromFormat('d-m-Y', $new_end_date)->format('Y-m-d');
 
       $course->center_id = $request->center_id;
       $course->title = $request->title;

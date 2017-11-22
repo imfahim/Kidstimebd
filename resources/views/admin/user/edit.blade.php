@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title', 'Edit Center')
+@section('title', 'Edit Admin')
 
 @section('content')
     <div class="container-fluid">

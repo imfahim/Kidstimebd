@@ -17,11 +17,13 @@ class GetController extends Controller
       return response()->json($centers, 200);
     }
 
+    /*
     public function enrollments(Request $request){
       $enrollment = Enrollment::all();
 
       return response()->json($enrollment, 200);
     }
+    */
 
     public function course($id){
       $courses = Course::where('center_id', $id)->get();

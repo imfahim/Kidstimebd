@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title', 'Enrollment')
+@section('title', 'Enrollments')
 @section('page-styles')
 	<!-- DataTables -->
 	<link href="{{ asset('css/datatable/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
@@ -11,7 +11,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<a href="/admin/enrollment/create" type="button" class="btn btn-default">Create New Enrollment</a>
+			<!--<a href="/admin/enrollment/create" type="button" class="btn btn-default">Create New Enrollment</a>-->
 			<div class="card">
 				<div class="card-header" data-background-color="orange">
 					<h4 class="title">Enrollments</h4>
@@ -23,16 +23,13 @@
 					<table id="datatable-all" class="table" data-form="deleteForm">
 						<thead class="text-primary">
 							<th>Enrollment Code</th>
-							<th>Course Code</th>
+							<th>Course <small>(Course Code)</small></th>
 							<th>Child Name</th>
 							<th>Mother Name</th>
 							<th>Father Name</th>
-							<th>Age</th>
 							<th>Contact No</th>
-							<th>Address</th>
-							<th>Email</th>
-							<th>Transaction No</th>
 							<th>Status</th>
+							<th></th>
 							<th></th>
 							<th></th>
 						</thead>
@@ -40,18 +37,22 @@
 							@foreach ($enrolls as $enroll)
 							<tr>
 							<td>{{$enroll->enrollment_id}}</td>
-							<td>{{$enroll->course_id}}</td>
+							<td>{{ $enroll->course->title }} <small>({{ $enroll->course->course_id }})</small></td>
 							<td>{{$enroll->child_name}}</td>
 							<td>{{$enroll->mother_name}}</td>
 							<td>{{$enroll->father_name}}</td>
-							<td>{{$enroll->age}}</td>
 							<td>{{$enroll->contact_no}}</td>
-							<td>{{$enroll->address}}</td>
-							<td>{{$enroll->email}}</td>
-							<td>{{$enroll->transaction_no}}</td>
-							<td>{{ ($enroll->status) ? 'Enabled' : 'Disabled' }}</td>
-							<td><a href="/admin/enrollment/edit" class="btn btn-info btn-sm">Edit</a></td>
-							<td><a href="" class="btn btn-danger btn-xs">Delete</a></td>
+							<td>{{ ($enroll->status) ? 'Approved' : 'Pending' }}</td>
+							<td><a href="{{ route('enrollment.show', [$enroll->id]) }}" class="btn btn-success btn-sm">Details</a></td>
+							<td><a href="{{ route('enrollment.edit', [$enroll->id]) }}" class="btn btn-info btn-sm">Edit</a></td>
+							<td>
+								<form class="form-delete" method="POST" action="{{ route('enrollment.destroy', [$enroll->id]) }}">
+									{{ csrf_field() }}
+									<input type="hidden" name="_method" value="delete" />
+									<input type="hidden" name="id" value="{{ $enroll->id }}" />
+									<input type="submit" class="btn btn-danger btn-xs" value="Delete"/>
+								</form>
+							</td>
 						</tr>
 							@endforeach
 						</tbody>

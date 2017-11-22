@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title', 'Create Center')
+@section('title', 'Create Admin')
 
 @section('content')
     <div class="container-fluid">
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary pull-right">Create</button>
-                            <a href="/admin/user" class="btn btn-primary pull-right">Back</a>
+                            <a href="{{ route('admin.index') }}" class="btn btn-primary pull-right">Back</a>
                             <div class="clearfix"></div>
                         </form>
                     </div>

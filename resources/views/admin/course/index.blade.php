@@ -2,6 +2,11 @@
 
 @section('title', 'Courses')
 
+@section('page-styles')
+	<!-- DataTables -->
+	<link href="{{ asset('css/datatable/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 <div class="container-fluid">
 	<div class="row">
@@ -14,7 +19,7 @@
 				</div>
 				<div class="card-content table-responsive">
 					@if ($courses)
-					<table class="table table-striped">
+					<table id="datatable-all" class="table table-striped" data-form="deleteForm">
 						<thead class="text-primary">
 							<th>Course Code</th>
 							<th>Title</th>
@@ -52,7 +57,7 @@
 								<td>{{ ($course->status) ? 'Enabled' : 'Disabled' }}</td>
 								<td><a href="{{ route('course.edit', [$course->id]) }}" class="btn btn-info btn-sm">Edit</a></td>
 								<td>
-									<form method="POST" action="{{ route('course.destroy', [$course->id]) }}">
+									<form class="form-delete" method="POST" action="{{ route('course.destroy', [$course->id]) }}">
 										{{ csrf_field() }}
 										<input type="hidden" name="_method" value="delete" />
 										<input type="hidden" name="id" value="{{ $course->id }}" />
@@ -63,7 +68,6 @@
 							@endforeach
 						</tbody>
 					</table>
-					{{ $courses->links() }}
 					@else
 						<h5>No Item's yet, Please add a Course.</h5>
 					@endif
@@ -72,4 +76,33 @@
 		</div>
 	</div>
 </div>
+
+<!-- Confirmation Modal Box -->
+@include('admin.layouts.modal')
+
+@endsection
+
+@section('page-scripts')
+	<!-- DataTables -->
+	<script src="{{ asset('js/datatable/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/datatable/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
+
+	<!-- page script -->
+	<script>
+	  $(function () {
+	    $('#datatable-all').DataTable()
+	  })
+	</script>
+
+	<script>
+	// For Deletion Confirmation Modal
+	$('table[data-form="deleteForm"]').on('click', '.form-delete', function(e){
+	    e.preventDefault();
+	    var $form=$(this);
+	    $('#confirm').modal({ backdrop: 'static', keyboard: false })
+	        .on('click', '#delete-btn', function(){
+	            $form.submit();
+	        });
+	});
+	</script>
 @endsection

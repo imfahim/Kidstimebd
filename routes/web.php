@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
   Route::resource('admin', 'Admin\AdminController', ['except' => 'show']);
 
-  Route::resource('enrollment', 'Admin\EnrollmentController', ['except' => 'show']);
+  Route::resource('enrollment', 'Admin\EnrollmentController', ['except' => ['create', 'store']]);
 
   Route::resource('profile', 'Admin\ProfileController', ['except' => 'show']);
   // Tor routes goes here
@@ -61,15 +61,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 */
 Route::group(['prefix' => 'api'], function(){
   Route::get('centers', 'Api\GetController@centers')->name('centers.get');
-  Route::post('centers', 'Api\PostController@centers')->name('centers.post');
-  Route::get('courses', 'Api\GetController@courses')->name('courses.get');
+  //Route::post('centers', 'Api\PostController@centers')->name('centers.post');
+  //Route::get('courses', 'Api\GetController@courses')->name('courses.get');
   Route::get('courses/{id}', 'Api\GetController@course');
-  Route::post('courses', 'Api\PostController@courses')->name('courses.post');
-  Route::get('admins', 'Api\GetController@admins')->name('admins.get');
-  Route::post('admins', 'Api\PostController@admins')->name('admins.post');
-  Route::get('profiles', 'Api\GetController@profiles')->name('profiles.get');
-  Route::post('profiles', 'Api\PostController@profiles')->name('profiles.post');
-  Route::get('enrollments', 'Api\GetController@enrollments')->name('enrollments.get');
+  //Route::post('courses', 'Api\PostController@courses')->name('courses.post');
+  //Route::get('admins', 'Api\GetController@admins')->name('admins.get');
+  //Route::post('admins', 'Api\PostController@admins')->name('admins.post');
+  //Route::get('profiles', 'Api\GetController@profiles')->name('profiles.get');
+  //Route::post('profiles', 'Api\PostController@profiles')->name('profiles.post');
+  //Route::get('enrollments', 'Api\GetController@enrollments')->name('enrollments.get');
   Route::post('enrollments/create', 'Api\PostController@enrollments')->name('enrollments.post');
 });
 
@@ -84,5 +84,3 @@ Route::get('/user', 'UserController@index')->name('user.index');
 
 Route::post('/user', 'UserController@getCourse')->name('user.courses');
 Route::get('/test/show', 'Admin\CourseController@index');
-//Route::get('/test/show/{id}', 'Admin\CourseController@show');
-//Route::get('/test/edit/{id}', 'Admin\CourseController@edit');
