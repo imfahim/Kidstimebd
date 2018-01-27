@@ -17,6 +17,13 @@ class GetController extends Controller
       return response()->json($centers, 200);
     }
 
+    public function center($id)
+    {
+      $center = Center::find($id);
+
+      return response()->json($center, 200);
+    }
+
     /*
     public function enrollments(Request $request){
       $enrollment = Enrollment::all();
